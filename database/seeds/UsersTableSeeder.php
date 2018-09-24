@@ -1,8 +1,9 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use App\User;
 
-class UserTableSeeder extends Seeder
+class UsersTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -11,15 +12,15 @@ class UserTableSeeder extends Seeder
      */
     public function run()
     {
-
         $faker = Faker\Factory::create();
 
         for($i = 0; $i < 1000; $i++) {
-            $user = App\User::create([
-                'username' => $faker->userName,
+            $user = User::create([
                 'name' => $faker->name,
-                'email' => $faker->email
+                'email' => $faker->email,
+                'password' => bcrypt('secret'),
             ]);
-        }
+            $user->attachRole('client');
+        }// for end
     }
 }
