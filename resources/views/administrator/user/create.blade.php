@@ -7,19 +7,34 @@
             <div class="card">
                 <div class="card-header"><b>Add New Client</b></div>
                 <div class="card-body">
-                    <div class="row">
+                   <div class="row">
                         {{ Form::open(array('route' => 'users.store', 'class' => 'col-md-12')) }}
                             <div class="form-group">
                                 {{ Form::label('name', 'Name', array('for' => 'exampleInputName1')) }}
-                                {{ Form::text('name', '', array('class' => 'form-control', 'id' => 'exampleInputName1', 'aria-describedby' => 'NameHelp', 'placeholder' => 'Enter your name')) }}
+                                @if ($errors->has('name'))
+                                    {{ Form::text('name', '', array('class' => 'form-control  is-invalid', 'id' => 'exampleInputName1', 'aria-describedby' => 'NameHelp', 'placeholder' => 'Enter your name')) }}
+                                    <div class="text-danger">{{ $errors->first('name') }}</div>
+                                @else
+                                    {{ Form::text('name', '', array('class' => 'form-control', 'id' => 'exampleInputName1', 'aria-describedby' => 'NameHelp', 'placeholder' => 'Enter your name')) }}
+                                @endif
                             </div>
                             <div class="form-group">
                                 {{ Form::label('email', 'E-Mail Address', array('for' => 'exampleInputEmail1')) }}
-                                {{ Form::text('email', '', array('class' => 'form-control', 'id' => 'exampleInputEmail1', 'aria-describedby' => 'EmailHelp', 'placeholder' => 'Enter your email')) }}
+                                @if ($errors->has('email'))
+                                    {{ Form::text('email', '', array('class' => 'form-control is-invalid', 'id' => 'exampleInputEmail1', 'aria-describedby' => 'EmailHelp', 'placeholder' => 'Enter your email')) }}
+                                    <div class="text-danger">{{ $errors->first('email') }}</div>
+                                @else
+                                    {{ Form::text('email', '', array('class' => 'form-control ', 'id' => 'exampleInputEmail1', 'aria-describedby' => 'EmailHelp', 'placeholder' => 'Enter your email')) }}
+                                @endif
                             </div>
                             <div class="form-group">
                                 {{ Form::label('password', 'Password', array('for' => 'exampleInputPassword1')) }}
-                                {{ Form::password('password', array('class' => 'form-control', 'id' => 'exampleInputEmail1', 'aria-describedby' => 'EmailHelp', 'placeholder' => 'Enter your email')) }}
+                                @if ($errors->has('password'))
+                                    <div class="text-danger">{{ $errors->first('password') }}</div>
+                                    {{ Form::password('password', array('class' => 'form-control is-invalid', 'id' => 'exampleInputEmail1', 'aria-describedby' => 'EmailHelp', 'placeholder' => 'Enter your email')) }}
+                                @else
+                                    {{ Form::password('password', array('class' => 'form-control', 'id' => 'exampleInputEmail1', 'aria-describedby' => 'EmailHelp', 'placeholder' => 'Enter your email')) }}
+                                @endif
                             </div>
                             {{ Form::button('Submit', array('type' => 'submit', 'class' => 'btn btn-primary')) }}
                         {{ Form::close() }}

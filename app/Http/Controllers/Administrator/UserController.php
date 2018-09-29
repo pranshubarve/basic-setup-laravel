@@ -7,7 +7,7 @@ use App\Http\Controllers\Controller;
 use App\User;
 use Session;
 use Redirect;
-
+use App\Http\Requests\StoreClientRequest;
 class UserController extends Controller
 {
     /**
@@ -37,7 +37,7 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreClientRequest $request)
     {
         // get only selected parameters from $request
         $requests = $request->only('name', 'password', 'email');
@@ -48,7 +48,6 @@ class UserController extends Controller
 
             // attache client role to new registered user
             $user->attachRole('client');
-            $user = '';
 
             // redirect with create flash message and set to session.
             Session::flash('message', 'Client created Successfully!');

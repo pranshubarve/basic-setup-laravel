@@ -6,9 +6,7 @@
             @if (Session::has('message'))
                 <div class="alert alert-info">{{ Session::get('message') }}</div>
             @endif
-            @if (Session::has('error'))
-                <div class="alert alert-error">{{ Session::get('error') }}</div>
-            @endif
+
             <div class="card">
                 <div class="card-header">
                     <!-- will be used to show any messages -->
@@ -27,7 +25,7 @@
                                         {{ $user->id }}
                                 </div>
                                 <div class="col-md-4">
-                                    <sub class="text-info font-weight-bold">{{ __('Email Address') }}</sub></br>
+                                    <sub class="text-info font-weight-bold">{{ __('E-mail Address') }}</sub></br>
                                         {{ $user->email }}
                                 </div>
                                 <div class="col-md-4">
