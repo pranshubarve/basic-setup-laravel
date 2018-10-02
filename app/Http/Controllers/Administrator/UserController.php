@@ -87,7 +87,7 @@ class UserController extends Controller
         // get user
         $user = User::find($id);
 
-        // show the edit form and pass the nerd
+        // show the edit form and pass the user
         return view('administrator.user.edit')->with('user', $user);
     }
 
@@ -133,8 +133,8 @@ class UserController extends Controller
     {
         try {
             // delete
-            $nerd = Nerd::find($id);
-            $nerd->delete();
+            $user = User::find($id);
+            $user->delete();
 
             // redirect with create flash message and set to session.
             Session::flash('message', 'Client updated Successfully!');
