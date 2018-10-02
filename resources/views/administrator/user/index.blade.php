@@ -40,13 +40,18 @@
                                 </div>
                                 <div class="col-md-3">
 
-                                    <!-- delete the nerd (uses the destroy method DESTROY /nerds/{id} -->
+                                    <!-- delete the uses the destroy method DESTROY /users/{id} -->
+                                    {{ Form::open(array('url' => 'users/' . $user->id)) }}
+                                        {{ Form::hidden('_method', 'DELETE') }}
+                                        {{ Form::submit('Delete', array('class' => 'btn btn-sm btn-warning')) }}
+                                    {{ Form::close() }}
 
-                                    <!-- show the nerd (uses the show method found at GET /nerds/{id} -->
+                                    <!-- show the user the show method found at GET /users/{id} -->
                                     <a class="btn btn-sm btn-info" href="{{ URL::to('admin/users/' . $user->id) }}">{{ __('Show') }}</a>
 
-                                    <!-- edit this nerd (uses the edit method found at GET /nerds/{id}/edit -->
+                                    <!-- edit this user the edit method found at GET /users/{id}/edit -->
                                     <a class="btn btn-sm btn-primary" href="{{ URL::to('admin/users/' . $user->id . '/edit') }}">{{ __('Edit') }}</a>
+
 
                                 </div>
                             </div>

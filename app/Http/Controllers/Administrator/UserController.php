@@ -84,7 +84,11 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+        // get user
+        $user = User::find($id);
+
+        // show the edit form and pass the nerd
+        return view('administrator.user.edit')->with('user', $user);
     }
 
     /**
@@ -96,7 +100,27 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $requests = $request->only('name', 'email');
+        try {
+            // find user with given id
+            $user = User::find($id);
+
+            // save  into database
+            $user->name       = $requests['name'];
+            $user->email      = $requests['email'];
+            $user->save();
+
+            // redirect with create flash message and set to session.
+            Session::flash('message', 'Client updated Successfully!');
+            return Redirect::to('admin/users');
+
+        } catch (\Exception $e) {
+
+            // redirect with create flash message and set to session.
+            Session::flash('error', 'Something went wrong!');
+            return Redirect::to('admin/users');
+
+        }
     }
 
     /**
@@ -107,6 +131,19 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try {
+            // delete
+            $nerd = Nerd::find($id);
+            $nerd->delete();
+
+            // redirect with create flash message and set to session.
+            Session::flash('message', 'Client updated Successfully!');
+            return Redirect::to('admin/users');
+
+        } catch (\Exception $e) {
+            // redirect with create flash message and set to session.
+            Session::flash('error', 'Something went wrong!');
+            return Redirect::to('admin/users');
+        }
     }
 }
